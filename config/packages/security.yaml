@@ -36,6 +36,7 @@ security:
          - { path: ^/profile, roles: ROLE_USER }
          - { path: ^/dashboard, roles: IS_AUTHENTICATED_FULLY }
          - { path: ^/expenses, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/budget, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:

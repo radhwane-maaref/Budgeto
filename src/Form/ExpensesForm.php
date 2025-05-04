@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Budget;
 use App\Entity\Category;
 use App\Entity\Expenses;
+use App\Repository\BudgetRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -14,6 +16,7 @@ class ExpensesForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $user = $options['user'];
         $builder
             ->add('amount')
             ->add('description')
@@ -21,6 +24,16 @@ class ExpensesForm extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Choose a category',
+            ])
+            ->add('budget', EntityType::class, [
+                'class' => Budget::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Select a budget',
+                'query_builder' => function (BudgetRepository $repo) use ($user) {
+                    return $repo->createQueryBuilder('b')
+                        ->where('b.user = :user')
+                        ->setParameter('user', $user);
+                },
             ])
 
         ;
@@ -30,6 +43,7 @@ class ExpensesForm extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Expenses::class,
+            'user' => null,
         ]);
     }
 }

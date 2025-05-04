@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Budget{% endblock %}
+
+{% block body %}
+    <h1>Budget</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ budget.id }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ budget.amount }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ budget.date ? budget.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_budget_index') }}">back to list</a>
+
+    <a href="{{ path('app_budget_edit', {'id': budget.id}) }}">edit</a>
+
+    {{ include('budget/_delete_form.html.twig') }}
+{% endblock %}

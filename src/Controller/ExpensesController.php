@@ -29,27 +29,37 @@ final class ExpensesController extends AbstractController
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute("app_login");
+        } else {
+            $expense = new Expenses();
+            $expense->setUser($user);
+            $expense->setDate(new \DateTime());
+
+            $form = $this->createForm(ExpensesForm::class, $expense, [
+                'user' => $this->getUser(),
+            ]);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $budget = $expense->getBudget();
+                if($budget)
+                {
+                    $newRemaining = $budget->getAmount() - $expense->getAmount();
+                    $budget->setAmount($newRemaining);
+
+                }
+
+                $entityManager->persist($expense);
+                $entityManager->flush();
+                
+
+                return $this->redirectToRoute('app_expenses_index', [], Response::HTTP_SEE_OTHER);
+            }
+
+            return $this->render('expenses/new.html.twig', [
+                'expense' => $expense,
+                'form' => $form,
+            ]);
         }
-        else{
-        $expense = new Expenses();
-        $expense->setUser($user); 
-        $expense->setDate(new \DateTime());
-    
-        $form = $this->createForm(ExpensesForm::class, $expense);
-        $form->handleRequest($request);
-    
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($expense);
-            $entityManager->flush();
-    
-            return $this->redirectToRoute('app_expenses_index', [], Response::HTTP_SEE_OTHER);
-        }
-    
-        return $this->render('expenses/new.html.twig', [
-            'expense' => $expense,
-            'form' => $form,
-        ]);
-    }
     }
 
     #[Route('/{id}', name: 'app_expenses_show', methods: ['GET'])]
@@ -58,7 +68,7 @@ final class ExpensesController extends AbstractController
         if ($expense->getUser() !== $this->getUser()) {
             throw $this->createAccessDeniedException('You are not allowed to view this expense.');
         }
-    
+
         return $this->render('expenses/show.html.twig', [
             'expense' => $expense,
         ]);
@@ -70,16 +80,16 @@ final class ExpensesController extends AbstractController
         if ($expense->getUser() !== $this->getUser()) {
             throw $this->createAccessDeniedException('You are not allowed to edit this expense.');
         }
-    
+
         $form = $this->createForm(ExpensesForm::class, $expense);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-    
+
             return $this->redirectToRoute('app_expenses_index', [], Response::HTTP_SEE_OTHER);
         }
-    
+
         return $this->render('expenses/edit.html.twig', [
             'expense' => $expense,
             'form' => $form,
@@ -92,12 +102,12 @@ final class ExpensesController extends AbstractController
         if ($expense->getUser() !== $this->getUser()) {
             throw $this->createAccessDeniedException('You are not allowed to delete this expense.');
         }
-    
-        if ($this->isCsrfTokenValid('delete'.$expense->getId(), $request->getPayload()->getString('_token'))) {
+
+        if ($this->isCsrfTokenValid('delete' . $expense->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($expense);
             $entityManager->flush();
         }
-    
+
         return $this->redirectToRoute('app_expenses_index', [], Response::HTTP_SEE_OTHER);
     }
 }

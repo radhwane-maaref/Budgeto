@@ -28,6 +28,7 @@ class CategoryFixture extends Fixture
             'Clothing',
             'Personal Care',
             'Miscellaneous',
+            'Others',
         ];
 
         foreach ($categories as $categoryName) {

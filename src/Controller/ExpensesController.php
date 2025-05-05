@@ -41,18 +41,19 @@ final class ExpensesController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $budget = $expense->getBudget();
-                if($budget)
-                {
+                if ($budget && $budget->getAmount() >= $expense->getAmount()) {
                     $newRemaining = $budget->getAmount() - $expense->getAmount();
                     $budget->setAmount($newRemaining);
-
+                    $entityManager->persist($expense);
+                    $entityManager->flush();
+                    return $this->redirectToRoute('app_expenses_index', [], Response::HTTP_SEE_OTHER);
+                } else {
+                    $this->addFlash('error', 'Budget amount is insufficient for this expense!');
+                    return $this->render('expenses/new.html.twig', [
+                        'expense' => $expense,
+                        'form' => $form,
+                    ]);
                 }
-
-                $entityManager->persist($expense);
-                $entityManager->flush();
-                
-
-                return $this->redirectToRoute('app_expenses_index', [], Response::HTTP_SEE_OTHER);
             }
 
             return $this->render('expenses/new.html.twig', [

@@ -1,4 +1,33 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<!-- Amount Field -->
+<div class="mb-3">
+    {{ form_label(form.amount, 'Amount') }}
+    {{ form_widget(form.amount, {'attr': {'class': 'form-control', 'placeholder': 'Enter the amount'}}) }}
+    {{ form_errors(form.amount) }}
+</div>
+
+<!-- Description Field -->
+<div class="mb-3">
+    {{ form_label(form.description, 'Description') }}
+    {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Enter a description'}}) }}
+    {{ form_errors(form.description) }}
+</div>
+
+<!-- Category Dropdown -->
+<div class="mb-3">
+    {{ form_label(form.category, 'Category') }}
+    {{ form_widget(form.category, {'attr': {'class': 'form-select'}}) }}
+    {{ form_errors(form.category) }}
+</div>
+<div class="mb-3">
+    {{ form_label(form.budget, 'Budget') }}
+    {{ form_widget(form.budget, {'attr': {'class': 'form-select'}}) }}
+    {{ form_errors(form.budget) }}
+</div>
+<!-- Save Button -->
+<div class="mb-3 text-center">
+    <button type="submit" class="btn btn-light">{{ button_label|default('Save') }}</button>
+</div>
+
 {{ form_end(form) }}

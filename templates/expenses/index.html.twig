@@ -1,41 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Expenses index{% endblock %}
+{% block title %}Expenses Index{% endblock %}
 
 {% block body %}
-    <h1>Expenses index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Amount</th>
-                <th>Description</th>
-                <th>Categorie</th>
-                <th>Date</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for expense in expenses %}
-            <tr>
-                <td>{{ expense.id }}</td>
-                <td>{{ expense.amount }}</td>
-                <td>{{ expense.description }}</td>
-                <td>{{ expense.category }}</td>
-                <td>{{ expense.date ? expense.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_expenses_show', {'id': expense.id}) }}">show</a>
-                    <a href="{{ path('app_expenses_edit', {'id': expense.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_expenses_new') }}">Create new</a>
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-light text-dark">
+            <h2 class="mb-0">📊 Expenses Tracker</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Amount (TND)</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for expense in expenses %}
+                    <tr>
+                        <td>{{ expense.id }}</td>
+                        <td>{{ expense.amount }}</td>
+                        <td>{{ expense.description }}</td>
+                        <td>{{ expense.category }}</td>
+                        <td>{{ expense.date ? expense.date|date('Y-m-d H:i') : '' }}</td>
+                        <td>
+                            <a href="{{ path('app_expenses_show', {'id': expense.id}) }}" class="btn btn-sm btn-info text-white">Show</a>
+                            <a href="{{ path('app_expenses_edit', {'id': expense.id}) }}" class="btn btn-sm btn-warning text-white">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">No records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer text-end">
+            <a href="{{ path('app_expenses_new') }}" class="btn btn-success">➕ Add New Expense</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

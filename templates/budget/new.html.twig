@@ -3,9 +3,11 @@
 {% block title %}New Budget{% endblock %}
 
 {% block body %}
-    <h1>Create new Budget</h1>
+   <h1 class="mb-4">
+    <i class="bi bi-plus-circle me-2 text-success"></i> Create New Budget
+</h1>
 
     {{ include('budget/_form.html.twig') }}
 
-    <a href="{{ path('app_budget_index') }}">back to list</a>
+    <a href="{{ path('app_budget_index') }}" class="btn custom-btn">← Back to list</a>
 {% endblock %}

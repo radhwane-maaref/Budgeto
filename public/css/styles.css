@@ -1,0 +1,11 @@
+.custom-card-header {
+    background-color: #ddda9e; /* Beige color */
+    color: #333; /* Dark text color for contrast */
+}
+.custom-btn {
+    background-color: #ddda9e; /* Beige color */
+    color: #333; /* Dark text color for contrast */
+}
+html,body {
+    background-color: #f5f5dc !important; /* beige */
+}

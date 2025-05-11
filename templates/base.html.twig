@@ -64,6 +64,12 @@
                         <i class="fas fa-wallet"></i> Budget
                     </a>
                 </li>
+                     <li class="nav-item">
+                    <a class="nav-link {% if app.request.attributes.get('_route') == 'documentation' %}active{% endif %}"
+                       href="{{ path('documentation') }}">
+                        <i class="fas fa-book"></i> Documentation
+                    </a>
+                </li>
 
                 {# <li class="nav-item">
                     <a class="nav-link {% if app.request.attributes.get('_route') == 'expense_report' %}active{% endif %}"

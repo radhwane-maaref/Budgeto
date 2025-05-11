@@ -15,6 +15,10 @@ use Symfony\Component\Routing\Attribute\Route;
 final class BudgetController extends AbstractController
 {
     #[Route(name: 'app_budget_index', methods: ['GET'])]
+    /**
+     * Affiche la liste des budgets de l'utilisateur connecté.
+     * Récupère tous les budgets associés à l'utilisateur et les passe à la vue.
+     */
     public function index(BudgetRepository $budgetRepository): Response
     {
         $user = $this->getUser();
@@ -26,6 +30,10 @@ final class BudgetController extends AbstractController
     }
 
     #[Route('/new', name: 'app_budget_new', methods: ['GET', 'POST'])]
+    /**
+     * Crée un nouveau budget pour l'utilisateur connecté.
+     * Affiche le formulaire de création et traite la soumission.
+     */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $budget = new Budget();
@@ -49,6 +57,10 @@ final class BudgetController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_budget_show', methods: ['GET'])]
+    /**
+     * Affiche le détail d'un budget spécifique.
+     * @param Budget $budget Le budget à afficher
+     */
     public function show(Budget $budget): Response
     {
         return $this->render('budget/show.html.twig', [
@@ -57,6 +69,13 @@ final class BudgetController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_budget_edit', methods: ['GET', 'POST'])]
+    /**
+     * Permet de modifier un budget existant.
+     * Affiche le formulaire d'édition et traite la soumission.
+     * @param Request $request La requête HTTP
+     * @param Budget $budget Le budget à modifier
+     * @param EntityManagerInterface $entityManager Le gestionnaire d'entités Doctrine
+     */
     public function edit(Request $request, Budget $budget, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(BudgetForm::class, $budget);
@@ -75,9 +94,15 @@ final class BudgetController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_budget_delete', methods: ['POST'])]
+    /**
+     * Supprime un budget après validation du token CSRF.
+     * @param Request $request La requête HTTP
+     * @param Budget $budget Le budget à supprimer
+     * @param EntityManagerInterface $entityManager Le gestionnaire d'entités Doctrine
+     */
     public function delete(Request $request, Budget $budget, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $budget->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$budget->getId(), $request->request->get('_token'))) {
             $entityManager->remove($budget);
             $entityManager->flush();
         }

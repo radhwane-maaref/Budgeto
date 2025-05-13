@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Expenses;
 use App\Form\ExpensesForm;
+use Symfony\Component\Form\FormError;
 use App\Repository\ExpensesRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/expenses')]
 final class ExpensesController extends AbstractController
@@ -48,7 +49,7 @@ final class ExpensesController extends AbstractController
                     $entityManager->flush();
                     return $this->redirectToRoute('app_expenses_index', [], Response::HTTP_SEE_OTHER);
                 } else {
-                    $this->addFlash('error', 'Budget amount is insufficient for this expense!');
+                    $form->get('budget')->addError(new FormError('Budget amount is insufficient for this expense.'));
                     return $this->render('expenses/new.html.twig', [
                         'expense' => $expense,
                         'form' => $form,

@@ -17,30 +17,7 @@ class ExpensesRepository extends ServiceEntityRepository
         parent::__construct($registry, Expenses::class);
     }
 
-    //    /**
-    //     * @return Expenses[] Returns an array of Expenses objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('e.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
 
-    //    public function findOneBySomeField($value): ?Expenses
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
     public function getTotalForCurrentMonth(User $user): float
     {
         $firstDay = new \DateTime('first day of this month 00:00:00');
@@ -56,6 +33,30 @@ class ExpensesRepository extends ServiceEntityRepository
     
         return (float) $qb->getQuery()->getSingleScalarResult();
     }
+
+    public function sumTotalExpenses($user): float
+    {
+        return (float) $this->createQueryBuilder('e')
+            ->select('SUM(e.amount)')
+            ->where('e.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+    
+    public function sumExpensesByCategory($user): array
+    {
+        return $this->createQueryBuilder('e')
+            ->select('c.name AS category, SUM(e.amount) AS total')
+            ->join('e.category', 'c')
+            ->where('e.user = :user')
+            ->setParameter('user', $user)
+            ->groupBy('c.name')
+            ->getQuery()
+            ->getResult();
+    }
+    
+
     
         
 }

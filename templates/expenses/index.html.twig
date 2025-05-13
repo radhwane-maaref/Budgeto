@@ -1,48 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Expenses Index{% endblock %}
+{% block title %}My Expenses{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <div class="card shadow">
-        <div class="card-header bg-light text-dark">
-            <h2 class="mb-0">📊 Expenses Tracker</h2>
-        </div>
-        <div class="card-body">
-            <table class="table table-hover align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Id</th>
-                        <th>Amount (TND)</th>
-                        <th>Description</th>
-                        <th>Category</th>
-                        <th>Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for expense in expenses %}
-                    <tr>
-                        <td>{{ expense.id }}</td>
-                        <td>{{ expense.amount }}</td>
-                        <td>{{ expense.description }}</td>
-                        <td>{{ expense.category }}</td>
-                        <td>{{ expense.date ? expense.date|date('Y-m-d H:i') : '' }}</td>
-                        <td>
-                            <a href="{{ path('app_expenses_show', {'id': expense.id}) }}" class="btn btn-sm btn-info text-white">Show</a>
-                            <a href="{{ path('app_expenses_edit', {'id': expense.id}) }}" class="btn btn-sm btn-warning text-white">Edit</a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="6" class="text-center text-muted">No records found</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <div class="card-footer text-end">
-            <a href="{{ path('app_expenses_new') }}" class="btn btn-success">➕ Add New Expense</a>
+<div class="container-fluid d-flex flex-column min-vh-100">
+    <div class="container mt-5 flex-grow-1">
+        <div class="card shadow">
+            <div class="card-header bg-light text-dark">
+                <h2 class="mb-0">📊 Expenses Tracker</h2>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            
+                            <th>Amount (TND)</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for expense in expenses %}
+                        <tr>
+                            
+                            <td>{{ expense.amount }}</td>
+                            <td>{{ expense.description }}</td>
+                            <td>{{ expense.category }}</td>
+                            <td>{{ expense.date ? expense.date|date('Y-m-d H:i') : '' }}</td>
+                            <td class="d-flex gap-2 align-items-center">
+                                <a href="{{ path('app_expenses_show', {'id': expense.id}) }}"
+                                   class="btn btn-sm btn-info text-white d-inline-flex align-items-center justify-content-center"
+                                   style="height: 31px;">
+                                    Show
+                                </a>
+
+                                <a href="{{ path('app_expenses_edit', {'id': expense.id}) }}"
+                                   class="btn btn-sm btn-warning text-white d-inline-flex align-items-center justify-content-center"
+                                   style="height: 31px;">
+                                    Edit
+                                </a>
+
+                                <form action="{{ path('app_expenses_delete', {'id': expense.id}) }}"
+                                      method="post"
+                                      class="d-inline-flex align-items-center"
+                                      style="height: 31px;">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ expense.id) }}">
+                                    <button type="submit"
+                                            class="btn btn-sm btn-danger d-inline-flex align-items-center justify-content-center"
+                                            style="height: 31px;">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">No records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-end">
+                <a href="{{ path('app_expenses_new') }}" class="btn btn-success">➕ Add New Expense</a>
+            </div>
         </div>
     </div>
 </div>

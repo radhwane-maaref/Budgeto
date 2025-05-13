@@ -1,20 +1,127 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DashboardController!{% endblock %}
+{% block title %}Dashboard | Budgeto
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<div class="row mb-4">
+		<div class="col-md-4">
+			<div class="card text-white bg-success shadow-sm rounded-3">
+				<div class="card-body">
+					<h5 class="card-title">
+						<i class="fas fa-wallet"></i>
+						Total Income</h5>
+					<p class="fs-4">{{ totalIncome|number_format(2, '.', ',') }}
+						DT</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card text-white bg-danger shadow-sm rounded-3">
+				<div class="card-body">
+					<h5 class="card-title">
+						<i class="fas fa-credit-card"></i>
+						Total Expenses</h5>
+					<p class="fs-4">{{ totalExpenses|number_format(2, '.', ',') }}
+						DT</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card text-white bg-primary shadow-sm rounded-3">
+				<div class="card-body">
+					<h5 class="card-title">
+						<i class="fas fa-balance-scale"></i>
+						Balance</h5>
+					<p class="fs-4">{{ balance|number_format(2, '.', ',') }}
+						DT</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<div class="example-wrapper">
+	<div class="row mb-5">
+		<div class="col-lg-12">
+			<h4 class="mb-3">
+				<i class="fas fa-list"></i>
+				Recent Expenses</h4>
+			<div class="table-responsive mb-4">
+				<table class="table table-hover align-middle">
+					<thead class="table-light">
+						<tr>
+							<th scope="col">Date</th>
+							<th scope="col">Category</th>
+							<th scope="col">Amount</th>
+							<th scope="col">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for expense in expenses %}
+							<tr>
+								<td>{{ expense.date|date('Y-m-d') }}</td>
+								<td>{{ expense.category.name }}</td>
+								<td>{{ expense.amount|number_format(2, '.', ',') }}
+									DT</td>
+								<td>{{ expense.description }}</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="4" class="text-muted text-center">No recent expenses found.</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<h4 class="mb-3">
+				<i class="fas fa-chart-pie"></i>
+				Expenses by Category</h4>
+			<div class="d-flex justify-content-center mb-5">
+				<div style="width: 400px;">
+					<canvas id="expenseChart" height="200"></canvas>
+				</div>
+			</div>
+
+		</div>
+	</div>
 
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/redouane/Documents/projet_integration/Budgeto/src/Controller/DashboardController.php</code></li>
-        <li>Your template at <code>/home/redouane/Documents/projet_integration/Budgeto/templates/dashboard/index.html.twig</code></li>
-    </ul>
-</div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('turbo:load', function () {
+            const ctx = document.getElementById('expenseChart');
+            if (ctx) {
+                new Chart(ctx.getContext('2d'), {
+                    type: 'pie',
+                    data: {
+                        labels: {{ categories|map(c => c.category)|json_encode|raw }},
+                        datasets: [{
+                            label: 'Total per category',
+                            data: {{ categories|map(c => c.total)|json_encode|raw }},
+                            backgroundColor: [
+                                '#3498db', '#e74c3c', '#2ecc71',
+                                '#f1c40f', '#9b59b6', '#fd7e14', '#20c997'
+                            ],
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}
+
+

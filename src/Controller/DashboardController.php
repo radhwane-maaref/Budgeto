@@ -1,32 +1,34 @@
 <?php
-
+// src/Controller/DashboardController.php
 namespace App\Controller;
 
 use App\Repository\ExpensesRepository;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use App\Repository\BudgetRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\User;
-final class DashboardController extends AbstractController
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class DashboardController extends AbstractController
 {
     #[Route('/dashboard', name: 'app_dashboard')]
-    public function index(ExpensesRepository $expensesRepository): Response
+    public function index(ExpensesRepository $expensesRepository, BudgetRepository $budgetRepository): Response
     {
-            /** @var User $user */
-    $user = $this->getUser();
+        $user = $this->getUser();
 
-    // Get last 5 expenses for the current user
-    $recentExpenses = $expensesRepository->findBy(
-        ['user' => $user],
-        ['date' => 'DESC'],
-        5 // limit
-    );
+        $recentExpenses = $expensesRepository->findBy(['user' => $user], ['date' => 'DESC'], 5);
 
-    $totalThisMonth = $expensesRepository->getTotalForCurrentMonth($user);
+        $totalExpenses = $expensesRepository->sumTotalExpenses($user);
+        $totalIncome = $budgetRepository->sumTotalIncome($user);
+        $balance = $totalIncome - $totalExpenses;
 
-    return $this->render('dashboard/index.html.twig', [
-        'recentExpenses' => $recentExpenses,
-        'totalThisMonth' => $totalThisMonth,
-    ]);
-}
+        $expensesByCategory = $expensesRepository->sumExpensesByCategory($user);
+
+        return $this->render('dashboard/index.html.twig', [
+            'expenses' => $recentExpenses,
+            'totalIncome' => $totalIncome,
+            'totalExpenses' => $totalExpenses,
+            'balance' => $balance,
+            'categories' => $expensesByCategory,
+        ]);
+    }
 }

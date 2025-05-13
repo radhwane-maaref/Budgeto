@@ -7,16 +7,13 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ budget.id }}</td>
-            </tr>
+
             <tr>
                 <th>Amount</th>
                 <td>{{ budget.amount }}</td>
             </tr>
             <tr>
-                <th>Date</th>
+                <th>Added at</th>
                 <td>{{ budget.date ? budget.date|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>

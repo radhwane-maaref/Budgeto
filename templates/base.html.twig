@@ -105,10 +105,16 @@
     <div class="main-content container">
         {% block body %}{% endblock %}
     </div>
-
+        <footer class="bg-white text-center text-muted py-4 border-top mt-5">
+        <div class="container">
+            <p class="mb-1">&copy; {{ "now"|date("Y") }} Budgeto. All rights reserved.</p>
+            <small class="d-block">Made in 🇹🇳</small>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
+
 </body>
 </html>

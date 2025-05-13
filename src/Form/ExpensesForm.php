@@ -32,7 +32,7 @@ class ExpensesForm extends AbstractType
                     ]),
                     new GreaterThanOrEqual([
                         'value' => 0,
-                        'message' => 'Amount must be a positive value.',
+                        
                     ]),
                 ],
             ])

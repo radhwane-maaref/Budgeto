@@ -3,7 +3,7 @@
 {% block title %}Budget{% endblock %}
 
 {% block body %}
-    <h1>Budget</h1>
+    <h1>Budget details</h1>
 
     <table class="table">
         <tbody>
@@ -21,7 +21,4 @@
 
     <a href="{{ path('app_budget_index') }}" class="btn custom-btn">← Back to list</a>
 
-    <a href="{{ path('app_budget_edit', {'id': budget.id}) }}" class="btn btn-warning" >edit</a>
-
-    {{ include('budget/_delete_form.html.twig') }}
 {% endblock %}

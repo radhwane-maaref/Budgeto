@@ -1,16 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Expenses{% endblock %}
+{% block title %}Expense details{% endblock %}
 
 {% block body %}
-    <h1>Expenses</h1>
+    <h1>Expense details</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ expense.id }}</td>
-            </tr>
+          
             <tr>
                 <th>Amount</th>
                 <td>{{ expense.amount }}</td>
@@ -34,15 +31,7 @@
         <!-- Back to list button -->
         <a href="{{ path('app_expenses_index') }}" class="btn custom-btn" style="height: 38px;">← Back to list</a>
 
-        <!-- Edit button -->
-        <a href="{{ path('app_expenses_edit', {'id': expense.id}) }}" class="btn btn-warning" style="height: 38px;">Edit</a>
 
-        <!-- Delete button (form) -->
-        <form action="{{ path('app_expenses_delete', {'id': expense.id}) }}" method="post" style="display: inline-flex; align-items: center; height: 38px;">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ expense.id) }}">
-            <button type="submit" class="btn btn-danger" style="height: 38px;">Delete</button>
-        </form>
     </div>
 
 {% endblock %}

@@ -60,26 +60,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->savingGoals = new ArrayCollection();
     }
 
+    /**
+     * Retourne l'identifiant unique de l'utilisateur.
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Retourne l'email de l'utilisateur.
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * Définit l'email de l'utilisateur.
+     */
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
     /**
-     * A visual identifier that represents this user.
-     *
+     * Retourne l'identifiant visuel de l'utilisateur (email).
      * @see UserInterface
      */
     public function getUserIdentifier(): string

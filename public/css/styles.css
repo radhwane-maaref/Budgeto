@@ -1,11 +1,242 @@
 .custom-card-header {
-    background-color: #ddda9e; /* Beige color */
-    color: #333; /* Dark text color for contrast */
+    background-color: #ddda9e;
+    color: #333;
 }
 .custom-btn {
-    background-color: #ddda9e; /* Beige color */
-    color: #333; /* Dark text color for contrast */
+    background-color: #ddda9e;
+    color: #333;
 }
 html,body {
-    background-color: #f5f5dc !important; /* beige */
+    background-color: #f5f5dc !important;
+}
+
+/* --- Documentation Page Styling et global container --- */
+.container, .main-content.container {
+    background: transparent;
+    border-radius: 18px;
+    box-shadow: none;
+    padding: 32px 28px 28px 28px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    max-width: 1100px;
+}
+
+/* --- Navbar --- */
+.navbar {
+    background: #fff;
+    box-shadow: 0 2px 18px rgba(224,201,127,0.10);
+    border-radius: 0 0 14px 14px;
+    padding: 0.7rem 2rem;
+    margin-bottom: 25px;
+}
+.navbar-brand {
+    font-weight: bold;
+    color: #e0c97f !important;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+.nav-link {
+    color: #6b5c2c !important;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0.5rem 1.1rem;
+    transition: background 0.2s, color 0.2s;
+}
+.nav-link.active, .nav-link:hover {
+    background: #e0c97f;
+    color: #fff !important;
+}
+
+/* --- Table Styling --- */
+table.table {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 18px rgba(224,201,127,0.12);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+table.table thead {
+    background: #e0c97f;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+}
+table.table th, table.table td {
+    vertical-align: middle;
+    border-bottom: 1px solid #f3e8c0;
+}
+table.table tbody tr:hover {
+    background: #fff7e0;
+    transition: background 0.2s;
+}
+table.table th {
+    font-size: 1.08rem;
+}
+table.table td {
+    font-size: 1.03rem;
+}
+
+/* --- Card --- */
+.card, .card.shadow, .card.shadow-sm {
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(224,201,127,0.13);
+    border: none;
+    background: #fff;
+}
+.card-header, .custom-card-header {
+    background: #e0c97f;
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    font-weight: 600;
+    font-size: 1.18rem;
+}
+.card-footer {
+    background: #fff8e0;
+    border-radius: 0 0 16px 16px;
+    border-top: none;
+}
+
+/* --- Buttons --- */
+.btn, .custom-btn {
+    border-radius: 8px !important;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(224,201,127,0.07);
+    border: none;
+}
+.btn-success, .btn-info, .btn-warning, .btn-danger, .btn-primary {
+    color: #fff !important;
+}
+.btn-success {
+    background: #7cb518 !important;
+}
+.btn-info {
+    background: #4fa3e3 !important;
+}
+.btn-warning {
+    background: #e0c97f !important;
+}
+.btn-danger {
+    background: #e74c3c !important;
+}
+.btn-primary {
+    background: #e0c97f !important;
+}
+.btn:hover, .custom-btn:hover {
+    filter: brightness(0.95);
+    box-shadow: 0 4px 16px rgba(224,201,127,0.17);
+}
+
+/* --- Form Styling --- */
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid #e0c97f;
+    box-shadow: none;
+    transition: border 0.2s;
+}
+.form-control:focus, .form-select:focus {
+    border: 1.5px solid #b89a3b;
+    box-shadow: 0 0 0 2px #f3e8c0;
+}
+label {
+    font-weight: 500;
+    color: #b89a3b;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .container, .main-content.container {
+        padding: 10px 2px;
+    }
+    table.table {
+        font-size: 0.97rem;
+    }
+}
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.3rem;
+    }
+    .container, .main-content.container {
+        padding: 4px 0;
+    }
+    .navbar {
+        padding: 0.3rem 0.4rem;
+    }
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #e0c97f;
+    margin-bottom: 24px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+.nav-tabs {
+    border-bottom: 2px solid #e0c97f;
+}
+.nav-tabs .nav-link {
+    color: #e0c97f;
+    font-weight: 500;
+    border-radius: 8px 8px 0 0;
+    background: #f7f4d6;
+    margin-right: 2px;
+    transition: background 0.2s, color 0.2s;
+}
+.nav-tabs .nav-link.active {
+    background: #e0c97f;
+    color: #fff;
+    border: none;
+}
+.tab-content {
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    padding: 28px 22px 18px 22px;
+    margin-top: -1px;
+    border: 1px solid #f0e7c3;
+    border-top: none;
+}
+/* Enlève le fond du premier cadre (objectif) */
+#objectif.tab-pane {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+h3 {
+    color: #e0c97f;
+    margin-bottom: 18px;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+.tab-pane ul {
+    padding-left: 22px;
+}
+.tab-pane ul li {
+    margin-bottom: 10px;
+    font-size: 1.07rem;
+    color: #444;
+    position: relative;
+    padding-left: 0;
+    list-style: disc;
+}
+.tab-pane ul li:before {
+    content: none;
+    display: none;
+}
+.tab-pane p {
+    font-size: 1.08rem;
+    color: #555;
+    line-height: 1.7;
+}
+@media (max-width: 600px) {
+    .container {
+        padding: 10px 2px;
+    }
+    .tab-content {
+        padding: 10px 2px;
+    }
+    h1 {
+        font-size: 1.3rem;
+    }
 }

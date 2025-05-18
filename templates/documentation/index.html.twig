@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Documentation{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Documentation de l’application</h1>
+        <ul class="nav nav-tabs mt-4" id="docTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="objectif-tab" data-bs-toggle="tab" data-bs-target="#objectif" type="button" role="tab">Objectif de l’appli</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="fonctionnalites-tab" data-bs-toggle="tab" data-bs-target="#fonctionnalites" type="button" role="tab">Fonctionnalités</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="technologies-tab" data-bs-toggle="tab" data-bs-target="#technologies" type="button" role="tab">Technologies utilisées</button>
+            </li>
+        </ul>
+        <div class="tab-content mt-3" id="docTabsContent">
+            <div class="tab-pane fade show active" id="objectif" role="tabpanel">
+                <h3>Objectif de l’appli</h3>
+                <p>
+                    L'application Budgeto permet aux utilisateurs de gérer leurs budgets et leurs dépenses de manière efficace. Elle offre un suivi personnalisé des dépenses, l'organisation par catégories, et la visualisation des budgets restants. Son objectif principal est d'aider les utilisateurs à mieux contrôler leurs finances personnelles et à atteindre leurs objectifs d'épargne.
+                </p>
+            </div>
+            <div class="tab-pane fade" id="fonctionnalites" role="tabpanel">
+                <h3>Fonctionnalités</h3>
+                <ul>
+                    <li>Création, édition et suppression de budgets personnalisés</li>
+                    <li>Ajout, modification et suppression de dépenses</li>
+                    <li>Catégorisation des dépenses</li>
+                    <li>Affichage du tableau de bord avec les dépenses récentes et le total du mois</li>
+                    <li>Gestion des utilisateurs et authentification sécurisée</li>
+                    <li>Alertes en cas de dépassement de budget</li>
+                </ul>
+            </div>
+           <div class="tab-pane fade" id="technologies" role="tabpanel">
+              <h3>Technologies utilisées</h3>
+              <ul>
+                  <li>Symfony (framework PHP)</li>
+                  <li>MySQL (base de données)</li>
+                  <li>Doctrine ORM</li>
+                  <li>Bootstrap (pour l'interface utilisateur)</li>
+                  <li>PHPUnit (tests)</li>
+              </ul>
+          </div>
+        </div>
+    </div>
+{% endblock %}

@@ -124,7 +124,9 @@ final class ExpensesController extends AbstractController
         }
 
         // Crée et gère le formulaire d'édition
-        $form = $this->createForm(ExpensesForm::class, $expense);
+        $form = $this->createForm(ExpensesForm::class, $expense, [
+            'user' => $this->getUser(),
+        ]);
         $form->handleRequest($request);
 
         // Si le formulaire est soumis et valide, enregistre les modifications

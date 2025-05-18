@@ -47,39 +47,38 @@
 			</a>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link {% if app.request.attributes.get('_route') == 'app_dashboard' %}active{% endif %}" href="{{ path('app_dashboard') }}">
-							<i class="fas fa-chart-line"></i>
-							Dashboard
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link {% if app.request.attributes.get('_route') == 'app_expenses_index' %}active{% endif %}" href="{{ path('app_expenses_index') }}">
-							<i class="fas fa-credit-card"></i>
-							Expenses
-
-
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link {% if app.request.attributes.get('_route') == 'app_budget_index' %}active{% endif %}" href="{{ path('app_budget_index') }}">
-							<i class="fas fa-wallet"></i>
-							Budget
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link {% if app.request.attributes.get('_route') == 'app_saving_goal_index' %}active{% endif %}" href="{{ path('app_saving_goal_index') }}">
-							<i class="fas fa-piggy-bank"></i>
-							Saving Goals
-						</a>
-					</li>
-
-				<li class="nav-item">
-                    <a class="nav-link {% if app.request.attributes.get('_route') == 'documentation' %}active{% endif %}"
-                       href="{{ path('documentation') }}">
-                        <i class="fas fa-book"></i> Documentation
-                    </a>
-                </li>
+					{% if app.user %}
+						<li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_route') == 'app_dashboard' %}active{% endif %}" href="{{ path('app_dashboard') }}">
+								<i class="fas fa-chart-line"></i>
+								Dashboard
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_route') == 'app_expenses_index' %}active{% endif %}" href="{{ path('app_expenses_index') }}">
+								<i class="fas fa-credit-card"></i>
+								Expenses
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_route') == 'app_budget_index' %}active{% endif %}" href="{{ path('app_budget_index') }}">
+								<i class="fas fa-wallet"></i>
+								Budget
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_route') == 'app_saving_goal_index' %}active{% endif %}" href="{{ path('app_saving_goal_index') }}">
+								<i class="fas fa-piggy-bank"></i>
+								Saving Goals
+							</a>
+						</li>
+						<li class="nav-item">
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'documentation' %}active{% endif %}"
+                           href="{{ path('documentation') }}">
+                            <i class="fas fa-book"></i> Documentation
+                        </a>
+                    </li>
+					{% endif %}
 
 					{# <li class="nav-item">
 					                    <a class="nav-link {% if app.request.attributes.get('_route') == 'expense_report' %}active{% endif %}"

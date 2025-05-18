@@ -1,25 +1,30 @@
 <div class="card p-4 mb-4">
-  
-    <div class="card-body">
-        {{ form_start(form) }}
-            <div class="mb-3">
-                <!-- Amount Field -->
-                {{ form_label(form.amount, 'Amount') }}
-                {{ form_widget(form.amount, {'attr': {'class': 'form-control', 'placeholder': 'Enter the amount'}}) }}
-                {{ form_errors(form.amount) }}
-            </div>
 
-            <div class="mb-3">
-                <!-- Name Field -->
-                {{ form_label(form.name, 'Name') }}
-                {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Enter the name'}}) }}
-                {{ form_errors(form.name) }}
-            </div>
+	<div class="card-body">
+		{{ form_start(form) }}
+		<div
+			class="mb-3">
+			<!-- Amount Field -->
+			{{ form_label(form.amount, 'Amount') }}
+			{{ form_widget(form.amount, {'attr': {'class': 'form-control', 'placeholder': 'Enter the amount'}}) }}
+			{{ form_errors(form.amount) }}
+		</div>
 
-            <div class="mb-3">
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-light ">{{ button_label|default('Save') }}</button>
-            </div>
-        {{ form_end(form) }}
-    </div>
+		<div
+			class="mb-3">
+			<!-- Name Field -->
+			{{ form_label(form.name, 'Name') }}
+			{{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Enter the name'}}) }}
+			{{ form_errors(form.name) }}
+		</div>
+
+		<div class="mb-3 text-center">
+			<button type="submit" class="btn btn-success px-4 py-2">
+				<i class="bi bi-check-circle me-1"></i>
+				{{ button_label|default('Save') }}
+			</button>
+		</div>
+
+		{{ form_end(form) }}
+	</div>
 </div>

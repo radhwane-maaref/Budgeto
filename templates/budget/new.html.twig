@@ -9,5 +9,39 @@
 
     {{ include('budget/_form.html.twig') }}
 
-    <a href="{{ path('app_budget_index') }}" class="btn custom-btn">← Back to list</a>
+<a href="{{ path('app_budget_index') }}" 
+   class="btn btn-outline-secondary mt-4 px-4 rounded-pill d-inline-flex align-items-center budget-back-btn"
+   data-bs-toggle="tooltip"
+   data-bs-title="Return to budget overview">
+    <i class="bi bi-arrow-left me-2 budget-arrow"></i>
+    Back to Budget List
+</a>
+
+<style>
+    .budget-back-btn {
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border-width: 1.5px;
+        font-weight: 500;
+    }
+
+    .budget-back-btn:hover {
+        background: #f3fff7;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1);
+        border-color: #28a745;
+        color: #218838;
+    }
+
+    .budget-arrow {
+        transition: transform 0.3s ease;
+        color: #28a745;
+    }
+
+    .budget-back-btn:hover .budget-arrow {
+        transform: translateX(-3px);
+        color: #218838;
+    }
+</style>
+
+
 {% endblock %}

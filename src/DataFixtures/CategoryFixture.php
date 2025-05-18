@@ -11,24 +11,24 @@ class CategoryFixture extends Fixture
     public function load(ObjectManager $manager): void
     {
         $categories = [
-            'Groceries',
-            'Rent',
-            'Utilities',
-            'Transport',
-            'Entertainment',
-            'Dining Out',
-            'Health & Medical',
-            'Insurance',
-            'Savings',
-            'Debt Repayment',
-            'Education',
-            'Subscriptions',
-            'Gifts',
-            'Travel',
-            'Clothing',
-            'Personal Care',
-            'Miscellaneous',
-            'Others',
+            '🛒 Groceries',
+            '🏠 Rent',
+            '💡 Utilities',
+            '🚌 Transport',
+            '🎬 Entertainment',
+            '🍽️ Dining Out',
+            '🏥 Health & Medical',
+            '🛡️ Insurance',
+            '💰 Savings',
+            '💳 Debt Repayment',
+            '🎓 Education',
+            '📺 Subscriptions',
+            '🎁 Gifts',
+            '✈️ Travel',
+            '👕 Clothing',
+            '🧼 Personal Care',
+            '📦 Miscellaneous',
+            '❓ Others',
         ];
 
         foreach ($categories as $categoryName) {
@@ -38,6 +38,5 @@ class CategoryFixture extends Fixture
         }
 
         $manager->flush();
-    
     }
 }

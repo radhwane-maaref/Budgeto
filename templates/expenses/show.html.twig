@@ -1,16 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Expenses{% endblock %}
+{% block title %}Expense details{% endblock %}
 
 {% block body %}
-    <h1>Expenses</h1>
+    <h1>Expense details</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ expense.id }}</td>
-            </tr>
+          
             <tr>
                 <th>Amount</th>
                 <td>{{ expense.amount }}</td>
@@ -20,7 +17,7 @@
                 <td>{{ expense.description }}</td>
             </tr>
             <tr>
-                <th>Categorie</th>
+                <th>Category</th>
                 <td>{{ expense.category }}</td>
             </tr>
             <tr>
@@ -30,11 +27,11 @@
         </tbody>
     </table>
 
+    <div class="d-flex gap-3">
+        <!-- Back to list button -->
+        <a href="{{ path('app_expenses_index') }}" class="btn custom-btn" style="height: 38px;">← Back to list</a>
 
-                    <a href="{{ path('app_expenses_index') }}" class="btn custom-btn">← Back to list</a>
-                
 
-    <a href="{{ path('app_expenses_edit', {'id': expense.id}) }}" class="btn btn-warning">edit</a>
+    </div>
 
-    {{ include('expenses/_delete_form.html.twig') }}
 {% endblock %}

@@ -3,6 +3,13 @@
 {% block title %}New Expenses{% endblock %}
 {% block body %}
 <div class="container mt-5">
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm">
@@ -12,9 +19,15 @@
                 <div class="card-body">
                     {{ include('expenses/_form.html.twig') }}
                 </div>
-                <div class="card-footer">
-                    <a href="{{ path('app_expenses_index') }}" class="btn custom-btn">← Back to list</a>
-                </div>
+<div class="card-footer bg-transparent pt-3">
+    <a href="{{ path('app_expenses_index') }}" 
+       class="btn btn-outline-secondary px-4 rounded-pill d-inline-flex align-items-center budget-back-btn"
+       data-bs-toggle="tooltip"
+       data-bs-title="Return to expenses overview">
+        <i class="bi bi-arrow-left me-2 budget-arrow"></i>
+        Back to Expenses List
+    </a>
+</div>  
             </div>
         </div>
     </div>

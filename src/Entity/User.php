@@ -47,10 +47,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Budget::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $budgets;
 
+    /**
+     * @var Collection<int, SavingGoal>
+     */
+    #[ORM\OneToMany(targetEntity: SavingGoal::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $savingGoals;
+
     public function __construct()
     {
         $this->expenses = new ArrayCollection();
         $this->budgets = new ArrayCollection();
+        $this->savingGoals = new ArrayCollection();
     }
 
     /**
@@ -187,6 +194,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($budget->getUser() === $this) {
                 $budget->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SavingGoal>
+     */
+    public function getSavingGoals(): Collection
+    {
+        return $this->savingGoals;
+    }
+
+    public function addSavingGoal(SavingGoal $savingGoal): static
+    {
+        if (!$this->savingGoals->contains($savingGoal)) {
+            $this->savingGoals->add($savingGoal);
+            $savingGoal->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSavingGoal(SavingGoal $savingGoal): static
+    {
+        if ($this->savingGoals->removeElement($savingGoal)) {
+            // set the owning side to null (unless already changed)
+            if ($savingGoal->getUser() === $this) {
+                $savingGoal->setUser(null);
             }
         }
 

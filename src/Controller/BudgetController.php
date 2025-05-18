@@ -37,7 +37,7 @@ final class BudgetController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $budget = new Budget();
-        $user=$this->getUser();
+        $user = $this->getUser();
         $budget->setUser($user);
         $budget->setDate(new \DateTime());
         $form = $this->createForm(BudgetForm::class, $budget);
@@ -102,11 +102,14 @@ final class BudgetController extends AbstractController
      */
     public function delete(Request $request, Budget $budget, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$budget->getId(), $request->request->get('_token'))) {
+        // Check CSRF token
+        if ($this->isCsrfTokenValid('delete' . $budget->getId(), $request->get('_token'))) {
+            // Remove the budget entity
             $entityManager->remove($budget);
             $entityManager->flush();
         }
 
+        // Redirect after deletion
         return $this->redirectToRoute('app_budget_index', [], Response::HTTP_SEE_OTHER);
     }
 }

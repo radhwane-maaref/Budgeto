@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit SavingGoal{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Edit SavingGoal</h1>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                {{ include('saving_goal/_form.html.twig', {'button_label': 'Update'}) }}
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <a href="{{ path('app_saving_goal_index') }}" class="btn btn-secondary">Back to list</a>
+        </div>
+
+    </div>
+{% endblock %}

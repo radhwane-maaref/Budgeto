@@ -2,9 +2,17 @@
 
 <!-- Amount Field -->
 <div class="mb-3">
-    {{ form_label(form.amount, 'Amount') }}
-    {{ form_widget(form.amount, {'attr': {'class': 'form-control', 'placeholder': 'Enter the amount'}}) }}
-    {{ form_errors(form.amount) }}
+    {{ form_label(form.amount, null, {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.amount, {
+        'attr': {
+            'class': 'form-control' ~ (form.amount.vars.errors|length > 0 ? ' is-invalid' : '')
+        }
+    }) }}
+    {% for error in form.amount.vars.errors %}
+        <div class="invalid-feedback">
+            {{ error.message }}
+        </div>
+    {% endfor %}
 </div>
 
 <!-- Description Field -->
@@ -21,13 +29,25 @@
     {{ form_errors(form.category) }}
 </div>
 <div class="mb-3">
-    {{ form_label(form.budget, 'Budget') }}
-    {{ form_widget(form.budget, {'attr': {'class': 'form-select'}}) }}
-    {{ form_errors(form.budget) }}
+    {{ form_label(form.budget, null, {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.budget, {
+        'attr': {
+            'class': 'form-control' ~ (form.budget.vars.errors|length > 0 ? ' is-invalid' : '')
+        }
+    }) }}
+    {% for error in form.budget.vars.errors %}
+        <div class="invalid-feedback">
+            {{ error.message }}
+        </div>
+    {% endfor %}
 </div>
+
+
 <!-- Save Button -->
 <div class="mb-3 text-center">
-    <button type="submit" class="btn btn-light">{{ button_label|default('Save') }}</button>
+    <button type="submit" class="btn btn-success px-4 py-2">
+        <i class="bi bi-check-circle me-1"></i> {{ button_label|default('Save') }}
+    </button>
 </div>
 
 {{ form_end(form) }}

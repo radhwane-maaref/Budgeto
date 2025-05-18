@@ -37,7 +37,7 @@
 		</style>
 		{% block stylesheets %}{% endblock %}
 	</head>
-	<body>
+	<body class="d-flex flex-column min-vh-100">
 
 		<!-- Navbar -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
@@ -47,39 +47,38 @@
 			</a>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link {% if app.request.attributes.get('_route') == 'app_dashboard' %}active{% endif %}" href="{{ path('app_dashboard') }}">
-							<i class="fas fa-chart-line"></i>
-							Dashboard
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link {% if app.request.attributes.get('_route') == 'app_expenses_index' %}active{% endif %}" href="{{ path('app_expenses_index') }}">
-							<i class="fas fa-credit-card"></i>
-							Expenses
-
-
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link {% if app.request.attributes.get('_route') == 'app_budget_index' %}active{% endif %}" href="{{ path('app_budget_index') }}">
-							<i class="fas fa-wallet"></i>
-							Budget
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link {% if app.request.attributes.get('_route') == 'app_saving_goal_index' %}active{% endif %}" href="{{ path('app_saving_goal_index') }}">
-							<i class="fas fa-piggy-bank"></i>
-							Saving Goals
-						</a>
-					</li>
-
-				<li class="nav-item">
-                    <a class="nav-link {% if app.request.attributes.get('_route') == 'documentation' %}active{% endif %}"
-                       href="{{ path('documentation') }}">
-                        <i class="fas fa-book"></i> Documentation
-                    </a>
-                </li>
+					{% if app.user %}
+						<li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_route') == 'app_dashboard' %}active{% endif %}" href="{{ path('app_dashboard') }}">
+								<i class="fas fa-chart-line"></i>
+								Dashboard
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_route') == 'app_expenses_index' %}active{% endif %}" href="{{ path('app_expenses_index') }}">
+								<i class="fas fa-credit-card"></i>
+								Expenses
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_route') == 'app_budget_index' %}active{% endif %}" href="{{ path('app_budget_index') }}">
+								<i class="fas fa-wallet"></i>
+								Budget
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_route') == 'app_saving_goal_index' %}active{% endif %}" href="{{ path('app_saving_goal_index') }}">
+								<i class="fas fa-piggy-bank"></i>
+								Saving Goals
+							</a>
+						</li>
+						<li class="nav-item">
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'documentation' %}active{% endif %}"
+                           href="{{ path('documentation') }}">
+                            <i class="fas fa-book"></i> Documentation
+                        </a>
+                    </li>
+					{% endif %}
 
 					{# <li class="nav-item">
 					                    <a class="nav-link {% if app.request.attributes.get('_route') == 'expense_report' %}active{% endif %}"
@@ -121,16 +120,18 @@
 		</nav>
 
 		<!-- Main Content -->
-		<div class="main-content container"> {% block body %}{% endblock %}
+		<main class="main-content container flex-grow-1 py-4">
+			{% block body %}{% endblock %}
+		</main>
+
+		<footer class="bg-white text-center text-muted py-4 border-top mt-auto">
+			<div class="container" style="max-width: 1140px; margin: 0 auto;">
+				<p class="mb-1">&copy;
+					{{ "now"|date("Y") }}
+					Budgeto. All rights reserved.</p>
+				<small class="d-block">Made in 🇹🇳</small>
 			</div>
-			<footer class="bg-white text-center text-muted py-4 border-top mt-5">
-				<div class="container">
-					<p class="mb-1">&copy;
-						{{ "now"|date("Y") }}
-						Budgeto. All rights reserved.</p>
-					<small class="d-block">Made in 🇹🇳</small>
-				</div>
-			</footer>
+		</footer>
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 			{% block javascripts %}
 				{% block importmap %}

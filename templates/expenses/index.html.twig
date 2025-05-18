@@ -4,22 +4,27 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container-fluid d-flex flex-column min-vh-100">
-		<div class="container mt-5 flex-grow-1">
-			<div class="card shadow">
-				<div class="card-header bg-light text-dark">
-					<h2 class="mb-0">📊 Expenses Tracker</h2>
-				</div>
-				<div class="card-body">
-					<table class="table table-hover align-middle">
-						<thead class="table-dark">
-							<tr>
+	<div class="container my-5">
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<h1 class="h3">
+				<i class="fas fa-credit-card"></i>
+				My Expenses
+			</h1>
+			<a href="{{ path('app_expenses_new') }}" class="btn btn-success">
+				<i class="fas fa-plus-circle"></i>
+				Add New Expense
+			</a>
+		</div>
 
-								<th>Amount (TND)</th>
-								<th>Description</th>
-								<th>Category</th>
-								<th>Date</th>
-								<th>Actions</th>
+		<div class="table-responsive">
+			<table class="table table-striped table-hover align-middle">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col">Amount (TND)</th>
+						<th scope="col">Description</th>
+						<th scope="col">Category</th>
+						<th scope="col">Date</th>
+						<th scope="col">Actions</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -38,7 +43,7 @@
 										<i class="fas fa-edit"></i>
 									</a>
 
-										<form method="post" action="{{ path('app_expenses_delete', {'id': expense.id}) }}" onsubmit="return confirm('Are you sure you want to delete this saving goal?');">
+										<form method="post" action="{{ path('app_expenses_delete', {'id': expense.id}) }}" onsubmit="return confirm('Are you sure you want to delete this expense?');">
 										<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ expense.id) }}">
 										<button class="btn btn-sm btn-outline-danger">
 											<i class="fas fa-trash"></i>
@@ -54,12 +59,7 @@
 								</tr>
 							{% endfor %}
 						</tbody>
-					</table>
-				</div>
-				<div class="card-footer text-end">
-					<a href="{{ path('app_expenses_new') }}" class="btn btn-success">➕ Add New Expense</a>
-				</div>
-			</div>
+			</table>
 		</div>
 	</div>
 {% endblock %}

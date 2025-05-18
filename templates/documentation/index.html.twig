@@ -4,44 +4,48 @@
 
 {% block body %}
     <div class="container mt-4">
-        <h1>Documentation de l’application</h1>
+        <h1>Application Documentation</h1>
         <ul class="nav nav-tabs mt-4" id="docTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="objectif-tab" data-bs-toggle="tab" data-bs-target="#objectif" type="button" role="tab">Objectif de l’appli</button>
+                <button class="nav-link active" id="objectif-tab" data-bs-toggle="tab" data-bs-target="#objectif" type="button" role="tab">Application Objective</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="fonctionnalites-tab" data-bs-toggle="tab" data-bs-target="#fonctionnalites" type="button" role="tab">Fonctionnalités</button>
+                <button class="nav-link" id="fonctionnalites-tab" data-bs-toggle="tab" data-bs-target="#fonctionnalites" type="button" role="tab">Features</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="technologies-tab" data-bs-toggle="tab" data-bs-target="#technologies" type="button" role="tab">Technologies utilisées</button>
+                <button class="nav-link" id="technologies-tab" data-bs-toggle="tab" data-bs-target="#technologies" type="button" role="tab">Technologies Used</button>
             </li>
         </ul>
         <div class="tab-content mt-3" id="docTabsContent">
             <div class="tab-pane fade show active" id="objectif" role="tabpanel">
-                <h3>Objectif de l’appli</h3>
+                <h3>Application Objective</h3>
                 <p>
-                    L'application Budgeto permet aux utilisateurs de gérer leurs budgets et leurs dépenses de manière efficace. Elle offre un suivi personnalisé des dépenses, l'organisation par catégories, et la visualisation des budgets restants. Son objectif principal est d'aider les utilisateurs à mieux contrôler leurs finances personnelles et à atteindre leurs objectifs d'épargne.
+                    The Budgeto application allows users to effectively manage their budgets and expenses. It offers personalized expense tracking, organization by categories, and visualization of remaining budgets. Its main goal is to help users better control their personal finances and achieve their savings goals.
+                </p>
+                <p>
+                    In addition to managing daily expenses, Budgeto provides tools to define and track long-term savings goals. The application provides clear visualizations of financial data, allowing users to make informed decisions about their spending habits. Thanks to an intuitive and responsive interface, Budgeto is accessible to everyone, regardless of their level of financial management expertise.
                 </p>
             </div>
             <div class="tab-pane fade" id="fonctionnalites" role="tabpanel">
-                <h3>Fonctionnalités</h3>
+                <h3>Features</h3>
                 <ul>
-                    <li>Création, édition et suppression de budgets personnalisés</li>
-                    <li>Ajout, modification et suppression de dépenses</li>
-                    <li>Catégorisation des dépenses</li>
-                    <li>Affichage du tableau de bord avec les dépenses récentes et le total du mois</li>
-                    <li>Gestion des utilisateurs et authentification sécurisée</li>
-                    <li>Alertes en cas de dépassement de budget</li>
+                    <li>Create, edit and delete customized budgets</li>
+                    <li>Add, modify and delete expenses</li>
+                    <li>Categorize expenses</li>
+                    <li>Dashboard display with recent expenses and monthly totals</li>
+                    <li>User management and secure authentication</li>
+                    <li>Create, track and manage savings goals</li>
+                    <li>Alerts for budget overruns</li>
                 </ul>
             </div>
            <div class="tab-pane fade" id="technologies" role="tabpanel">
-              <h3>Technologies utilisées</h3>
+              <h3>Technologies Used</h3>
               <ul>
-                  <li>Symfony (framework PHP)</li>
-                  <li>MySQL (base de données)</li>
+                  <li>Symfony (PHP framework)</li>
+                  <li>MySQL (database)</li>
                   <li>Doctrine ORM</li>
-                  <li>Bootstrap (pour l'interface utilisateur)</li>
-                  <li>PHPUnit (tests)</li>
+                  <li>Bootstrap (for user interface)</li>
+                  <li>PHPUnit (testing)</li>
               </ul>
           </div>
         </div>
